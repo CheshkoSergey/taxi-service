@@ -27,10 +27,9 @@ SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY", "django-insecure-8ovil3xu6=eaoq
 # SECURITY WARNING: don"t run with debug turned on in production!
 DEBUG = os.environ.get("DJANGO_DEBUG", "") != "False"
 
-ALLOWED_HOSTS = ["taxi-service-proj.herokuapp.com", "127.0.0.1"]
+ALLOWED_HOSTS = ["127.0.0.1", "taxi-service-proj.herokuapp.com"]
 
 INTERNAL_IPS = [
-    "127.0.0.1"
 ]
 
 # Application definition
@@ -92,9 +91,8 @@ DATABASES = {
     }
 }
 
-# dj-database-url
-db_from_env = dj_database_url.config(conn_max_age=500)
-DATABASES['default'].update(db_from_env)
+db_from_env = dj_database_url.config(conn_max_age=600, ssl_require=True)
+DATABASES["default"].update(db_from_env)
 
 
 # Password validation
