@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% load crispy_forms_filters %}
+
+{% block title %}
+   <title>Driver list</title>
+{% endblock %}
+
+{% block content %}
+    <h1>Driver list</h1>
+    <hr>
+    <p><a href="{% url 'taxi:driver-create' %}" class="btn btn-primary"> Create driver</a></p>
+    <form action="" method="get" class="form-inline">
+      {% csrf_token %}
+      {{ search_form|crispy}}
+      <input class="btn btn-secondary" type="submit" value="🔎">
+    </form>
+    {% if driver_list %}
+    <table class="table">
+      <tr>
+        <th>ID</th>
+        <th>Username</th>
+        <th>First name</th>
+        <th>Last name</th>
+        <th>License number</th>
+      </tr>
+    {% for driver in driver_list %}
+      <tr>
+        <td>{{ driver.id }}</td>
+        <td><a class="text-ref" href="{{ driver.get_absolute_url }}">{{ driver.username }} {% if user == driver %} (Me){% endif %}</a></td>
+        <td>{{ driver.first_name }}</td>
+        <td>{{ driver.last_name }}</td>
+        <td>{{ driver.license_number }}</td>
+      </tr>
+    {% endfor %}
+
+    </table>
+    {% else %}
+      <p>There are no drivers in the service.</p>
+    {% endif %}
+{% endblock %}
+
+<img class="img-sidebar" src="https://image.shutterstock.com/image-vector/magnifier-glass-icon-logo-template-600w-1437502985.jpg" alt="">

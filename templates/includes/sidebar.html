@@ -1,0 +1,21 @@
+<ul class="sidebar-nav list-group">
+  {% if user.is_authenticated %}
+    <li class="list-group-item sidebar-col">
+        <a class="text-col img-user" href="{{ user.get_absolute_url }}">
+            <img class="img-sidebar" src="https://cdn-icons-png.flaticon.com/512/23/23171.png" alt="">
+            {{ user.get_username }}</a></li>
+    <li class="list-group-item sidebar-col">
+        <a class="text-col" href="{% url 'logout'%}?next={{request.path}}">
+            <img class="img-sidebar" src="https://img.icons8.com/ios-filled/344/exit-sign.png" alt="">
+            Logout</a></li>
+  {% else %}
+    <li class="list-group-item sidebar-col"><a class="text-col" href="{% url 'login'%}?next={{request.path}}">Login</a></li>
+  {% endif %}
+
+  <br>
+
+  <li class="list-group-item sidebar-col"><a class="text-col" href="{% url 'taxi:index' %}">Home</a></li>
+  <li class="list-group-item sidebar-col"><a class="text-col" href="{% url 'taxi:driver-list' %}">All drivers</a></li>
+  <li class="list-group-item sidebar-col"><a class="text-col" href="{% url 'taxi:car-list' %}">All cars</a></li>
+  <li class="list-group-item sidebar-col"><a class="text-col" href="{% url 'taxi:manufacturer-list' %}">All manufacturers</a></li>
+</ul>
